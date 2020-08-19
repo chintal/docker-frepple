@@ -1,0 +1,20 @@
+version: '3'
+services:
+  app:
+    build: ./app/
+    container_name: "frepple-webapp"
+    hostname: "frepple-webapp"
+    ports:
+      - "1079:80"
+      - "1442:443"
+    links:
+      - "postgres:frepple-postgres"
+    depends_on:
+      - postgres
+  postgres:
+    build: ./postgres/
+    container_name: "frepple-postgres"
+    hostname: "frepple-postgres"
+    expose:
+      - "5432"
+
