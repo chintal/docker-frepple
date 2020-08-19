@@ -12,7 +12,7 @@ services:
     depends_on:
       - postgres
   postgres:
-    build: ./postgres/
+    build: ./postgres
     container_name: "frepple-postgres"
     hostname: "frepple-postgres"
     expose:

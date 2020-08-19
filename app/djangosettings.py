@@ -37,8 +37,8 @@ ADMINS = (
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = "%@mzit!i8b*$zc&6oev96=Tue Aug 18 20:09:32 UTC 2020"
 
-FREPPLE_LOGDIR = "/var/log/frepple"
-FREPPLE_APP = "/usr/lib/python3/dist-packages"
+#FREPPLE_LOGDIR = "/var/log/frepple"
+#FREPPLE_APP = "/usr/lib/python3/dist-packages"
 
 # FrePPLe only supports the postgresql database.
 # Create additional entries in this dictionary to define scenario schemas.
@@ -46,7 +46,7 @@ FREPPLE_APP = "/usr/lib/python3/dist-packages"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "frepple",
+        "NAME": "freppledb",
         "USER": "frepple",  # Role name when using md5 authentication.
         # Leave as an empty string when using peer or
         # ident authencation.
@@ -73,6 +73,93 @@ DATABASES = {
         "SQL_ROLE": "report_role",
         "SECRET_WEBTOKEN_KEY": SECRET_KEY,
     },
+    "scenario1": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "scenario1",
+        "USER": "frepple",  # Role name when using md5 authentication.
+        # Leave as an empty string when using peer or
+        # ident authencation.
+        "PASSWORD": "frepple",  # Role password when using md5 authentication.
+        # Leave as an empty string when using peer or
+        # ident authencation.
+        "HOST": "postgres",  # When using TCP sockets specify the hostname,
+        # the ip4 address or the ip6 address here.
+        # Leave as an empty string to use Unix domain
+        # socket ("local" lines in pg_hba.conf).
+        "PORT": "5432",  # Leave to empty string when using Unix domain sockets.
+        # Specify the port number when using a TCP socket.
+        "OPTIONS": {},  # Backend specific configuration parameters.
+        "TEST": {
+            "NAME": "test_scenario1"  # Database name used when running the test suite.
+        },
+        "FILEUPLOADFOLDER": os.path.normpath(
+            os.path.join(FREPPLE_LOGDIR, "data", "scenario1")
+        ),
+        # Role name for executing custom reports and processing sql data files.
+        # Make sure this role has properly restricted permissions!
+        # When left unspecified, SQL statements run with the full read-write
+        # permissions of the user specified above. Which can be handy, but is not secure.
+        "SQL_ROLE": "report_role",
+        "SECRET_WEBTOKEN_KEY": SECRET_KEY,
+    },
+    "scenario2": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "scenario2",
+        "USER": "frepple",  # Role name when using md5 authentication.
+        # Leave as an empty string when using peer or
+        # ident authencation.
+        "PASSWORD": "frepple",  # Role password when using md5 authentication.
+        # Leave as an empty string when using peer or
+        # ident authencation.
+        "HOST": "postgres",  # When using TCP sockets specify the hostname,
+        # the ip4 address or the ip6 address here.
+        # Leave as an empty string to use Unix domain
+        # socket ("local" lines in pg_hba.conf).
+        "PORT": "5432",  # Leave to empty string when using Unix domain sockets.
+        # Specify the port number when using a TCP socket.
+        "OPTIONS": {},  # Backend specific configuration parameters.
+        "TEST": {
+            "NAME": "test_scenario2"  # Database name used when running the test suite.
+        },
+        "FILEUPLOADFOLDER": os.path.normpath(
+            os.path.join(FREPPLE_LOGDIR, "data", "scenario2")
+        ),
+        # Role name for executing custom reports and processing sql data files.
+        # Make sure this role has properly restricted permissions!
+        # When left unspecified, SQL statements run with the full read-write
+        # permissions of the user specified above. Which can be handy, but is not secure.
+        "SQL_ROLE": "report_role",
+        "SECRET_WEBTOKEN_KEY": SECRET_KEY,
+    },
+    "scenario3": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "scenario3",
+        "USER": "frepple",  # Role name when using md5 authentication.
+        # Leave as an empty string when using peer or
+        # ident authencation.
+        "PASSWORD": "frepple",  # Role password when using md5 authentication.
+        # Leave as an empty string when using peer or
+        # ident authencation.
+        "HOST": "postgres",  # When using TCP sockets specify the hostname,
+        # the ip4 address or the ip6 address here.
+        # Leave as an empty string to use Unix domain
+        # socket ("local" lines in pg_hba.conf).
+        "PORT": "5432",  # Leave to empty string when using Unix domain sockets.
+        # Specify the port number when using a TCP socket.
+        "OPTIONS": {},  # Backend specific configuration parameters.
+        "TEST": {
+            "NAME": "test_scenario3"  # Database name used when running the test suite.
+        },
+        "FILEUPLOADFOLDER": os.path.normpath(
+            os.path.join(FREPPLE_LOGDIR, "data", "scenario3")
+        ),
+        # Role name for executing custom reports and processing sql data files.
+        # Make sure this role has properly restricted permissions!
+        # When left unspecified, SQL statements run with the full read-write
+        # permissions of the user specified above. Which can be handy, but is not secure.
+        "SQL_ROLE": "report_role",
+        "SECRET_WEBTOKEN_KEY": SECRET_KEY,
+    },
 }
 
 LANGUAGE_CODE = "en"
@@ -84,7 +171,7 @@ GOOGLE_ANALYTICS = None  # "UA-1950616-4"
 # ================= END UPDATED BLOCK BY WINDOWS INSTALLER =================
 
 # If passwords are set in this file they will be used instead of the ones set in the database parameters table
-ODOO_PASSWORDS = {"default": ""}
+ODOO_PASSWORDS = {"default": "", "scenario1": "", "scenario2": "", "scenario3": ""}
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -189,18 +276,18 @@ ATTRIBUTES = []
 
 import django.contrib.admindocs
 
-#LOCALE_PATHS = (
-#    os.path.normpath(os.path.join(FREPPLE_HOME, "locale", "django")),
-#    os.path.normpath(os.path.join(FREPPLE_HOME, "locale", "auth")),
-#    os.path.normpath(os.path.join(FREPPLE_HOME, "locale", "contenttypes")),
-#    os.path.normpath(os.path.join(FREPPLE_HOME, "locale", "sessions")),
-#    os.path.normpath(os.path.join(FREPPLE_HOME, "locale", "admin")),
-#    os.path.normpath(os.path.join(FREPPLE_HOME, "locale", "messages")),
-#    os.path.normpath(os.path.join(FREPPLE_APP, "freppledb", "locale")),
-#    os.path.normpath(
-#        os.path.join(os.path.dirname(django.contrib.admindocs.__file__), "locale")
-#    ),
-#)
+LOCALE_PATHS = (
+    os.path.normpath(os.path.join(FREPPLE_HOME, "locale", "django")),
+    os.path.normpath(os.path.join(FREPPLE_HOME, "locale", "auth")),
+    os.path.normpath(os.path.join(FREPPLE_HOME, "locale", "contenttypes")),
+    os.path.normpath(os.path.join(FREPPLE_HOME, "locale", "sessions")),
+    os.path.normpath(os.path.join(FREPPLE_HOME, "locale", "admin")),
+    os.path.normpath(os.path.join(FREPPLE_HOME, "locale", "messages")),
+    os.path.normpath(os.path.join(FREPPLE_APP, "freppledb", "locale")),
+    os.path.normpath(
+        os.path.join(os.path.dirname(django.contrib.admindocs.__file__), "locale")
+    ),
+)
 
 TEMPLATES = [
     {
